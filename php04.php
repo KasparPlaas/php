@@ -37,8 +37,54 @@
                             Tubli!
                             </div>%d / %d = %0.2f', $arv1, $arv2, $jaga);
                         }
+                        if($arv1>$arv2){
+                            echo '<div class="alert alert-danger" role="alert">
+                            Arv1 on suurem!
+                            </div>';
+
+                        }else if($arv1<$arv2){
+                            echo '<div class="alert alert-danger" role="alert">
+                            Arv1 on väiksem!
+                            </div>';
+                        }else{
+                            echo '<div class="alert alert-danger" role="alert">
+                            Arvud on võrsed!
+                            </div>';
+                        }   
+                        if($arv1==$arv2){
+                            echo '<div class="alert alert-danger" role="alert">
+                            Tegemist on ruuduga!
+                            <img width="50" src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/64x64/plain/shape_square.png" alt="">
+                            </div>';
+                        }else{
+                            echo '<div class="alert alert-danger" role="alert">
+                            Tegemist on ristkülikuga!
+                            <img width="50" src="https://cdn-icons-png.flaticon.com/512/5895/5895916.png" alt="">
+                            </div>';
+                        }
+                        if($arv1%5==0){
+                            echo '<div class="alert alert-danger" role="alert">
+                            JUUBEL!
+                            </div>';
+                        }else{
+                            echo '<div class="alert alert-danger" role="alert">
+                            Ei ole juubel!
+                            </div>';
+                        }
+                        switch($arv1){
+                            case ($arv1 >= 10): echo 'SUPER';
+                            break;
+                            case ($arv1 >= 5 and $arv1<10): echo 'TEHTUD!';
+                            break;
+                            case ($arv1 < 5): echo 'Kasin!';
+                            break;
+
+                            default: echo 'SISETA POMA PUNKTID!';
 
                         }
+                  
+                    }
+
                     
                 ?>
             </div>
