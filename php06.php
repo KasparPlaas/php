@@ -104,8 +104,6 @@
 
                 echo "<br>";
 
-                echo "<h2>7. Kolmega jagunevad</h2>";
-
 
                 ?>
             </div>

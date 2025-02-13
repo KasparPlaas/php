@@ -1,0 +1,12 @@
+10p - 5 (Ćµigeaegselt)
+8p - 4
+6p - 3
+
+Koosta Bootstrap5 abil samasugune leht 1p
+	- kohandub ja valideerub
+Koosta menĆ¼Ć¼, millel klikkides sisu muutub dĆ¼naamiliselt 1p
+	- teiste lehtede sisse pane lihtsalt pealkiri ja tekst
+	- kui lehte ei eksisteeri, siis tuleb vastav teade
+Kasuta massiivi, et avalehel Jumbotroni sees olev sisu kuvatakse suvaliselt (tekst ja pilt) 2p
+Tooted tulevad CSV failist (pilt, nimetus, hind) 2p
+Loo adminni leht, kus admin saab tooteid kustutada ja lisada 4p

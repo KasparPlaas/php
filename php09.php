@@ -72,6 +72,8 @@
                 </form> 
 
                 <?php
+                
+                echo "noob, loll ja jobu";
 
                 if (isset($_GET["parandus"])) {
                     $parandus = $_GET["parandus"];
