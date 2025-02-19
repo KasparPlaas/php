@@ -1,17 +1,10 @@
-<!-- Tüdrukud
-koosta vähemalt 8 tüdruku nimedega massiiv
-kasuta funktsiooni sort(), et sorteerida
-väljastada need kasvavas järjekorras ning kuvada ridade kaupa
-väljasta tüdrukute nimekirjast eraldi esimesed 3 nime
-väljasta eraldi viimane nimi
-väljasta eraldi üks suvaline nimi (suvaline arv genereeritakse vastavalt massiivis olevate elementide arvule) -->
 
 <!DOCTYPE html>
 <html lang="et">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harjutused</title>
+    <title>Harjutus 5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
