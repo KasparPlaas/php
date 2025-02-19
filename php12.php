@@ -9,36 +9,97 @@
     </head>
 <body>
     <div class="container">
-        <h1>Harjutus 12</h1>
+        <h1>Harjutus 11</h1>
         <div class="row">
             <div class="col-md-4">
 
-                <h2>Pildi üleslaadimine</h2>
+                <h2>Sõiduaeg</h2>
+
+                <form action="" method="get">
+                    <div class="mb-3">
+                        <label class="form-label">Sisesta oma nimi!</label>
+                        <input type="text" class="form-control" name="kasutaja">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sõidu alustus aeg: [hh:mm]</label>
+                        <input type="text" class="form-control" name="algus">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sõidu lõpetamise aeg: [hh:mm]</label>
+                        <input type="text" class="form-control" name="lopp">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Saada</button>
+                </form> 
+
+
                 <?php
-                if(!empty($_FILES['minu_fail']['name'])){
-                    $sinu_faili_nimi = $_FILES['minu_fail']['name'];
-                    $ajutine_fail= $_FILES['minu_fail']['tmp_name'];
-                        
-                    $kataloog = 'php12_pildid';
-                    if(move_uploaded_file($ajutine_fail, $kataloog.'/'.$sinu_faili_nimi)){
-                        echo 'Faili üleslaadimine oli edukas';	
-                    } else {
-                        echo 'Faili üleslaadimine ebaõnnestus';
+
+                if (isset($_GET["kasutaja"]) && isset($_GET["algus"]) && isset($_GET["lopp"])) {
+                    $kasutaja = $_GET["kasutaja"];
+                    $algus = $_GET["algus"];
+                    $lopp = $_GET["lopp"];
+                    $algus = explode(":", $algus);
+                    $lopp = explode(":", $lopp);
+                    $algus = $algus[0] * 60 + $algus[1];
+                    $lopp = $lopp[0] * 60 + $lopp[1];
+                    $soiduaeg = $lopp - $algus;
+                    $tunnid = floor($soiduaeg / 60);
+                    $minutid = $soiduaeg % 60;
+                    echo "Tere, $kasutaja! Teie sõiduaeg on $tunnid tundi ja $minutid minutit.";
+                }
+
+                ?>
+
+
+
+                <h2>Palkade võrdlus</h2>
+
+                <?php
+
+                $allikas = 'csv/tootajad.csv';
+
+                $fail = fopen($allikas, 'r');
+
+                $meeste_palk = 0;
+                $naiste_palk = 0;
+                $meeste_arv = 0;
+                $naiste_arv = 0;
+                $meeste_max = 0;
+                $naiste_max = 0;
+
+                while (($rida = fgetcsv($fail, 1000, ';')) !== false) {
+                    if (count($rida) < 3) {
+                        continue;
+                    }
+                    
+                    $nimi = trim($rida[0]);
+                    $sugu = trim($rida[1]);
+                    $palk = floatval($rida[2]);
+
+                    if ($sugu === 'm') {
+                        $meeste_palk += $palk;
+                        $meeste_arv++;
+                        if ($palk > $meeste_max) {
+                            $meeste_max = $palk;
+                        }
+                    } elseif ($sugu === 'n') {
+                        $naiste_palk += $palk;
+                        $naiste_arv++;
+                        if ($palk > $naiste_max) {
+                            $naiste_max = $palk;
+                        }
                     }
                 }
-                
 
-                    
-                
+                fclose($fail);
+
+                $meeste_keskmine = ($meeste_arv > 0) ? ($meeste_palk / $meeste_arv) : 0;
+                $naiste_keskmine = ($naiste_arv > 0) ? ($naiste_palk / $naiste_arv) : 0;
+
+                echo "Meeste keskmine palk on " . number_format($meeste_keskmine, 2) . " ja kõige suurem palk on " . number_format($meeste_max, 2) . ".<br>";
+                echo "Naiste keskmine palk on " . number_format($naiste_keskmine, 2) . " ja kõige suurem palk on " . number_format($naiste_max, 2) . ".";
+
                 ?>
-                <form action="" method="post" enctype="multipart/form-data">
-                    <input type="file" name="minu_fail" accept="image/jpeg, image/jpg"><br>
-                    <input type="submit" value="Lae üles!">
-                </form>
-
-                <h2>Üleslaetud pildid</h2>
-
-
 
 
             </div>

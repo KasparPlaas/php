@@ -25,7 +25,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    
+
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -58,44 +58,48 @@
             $tekst = $tekstid[array_rand($tekstid)];
             ?>
 
-            <div class="row justify-content-center align-items-center">
-                <div class="col-sm-8">
+            <div class="row justify-content-center align-items-center text-center text-sm-start mt-5 mb-5 me-5 ms-5">
+
+                <div class="col-12 col-sm-8">
                     <h2><?php echo $tekst; ?></h2>
                     <p>Kasuta ilma taustata pilti. Ja kindlasti võta kasutusele BS5!</p>
-                    <button class="btn btn-warning">Vaata pakkumisi →</button>
+                    <button class="btn btn-warning mb-3 mb-sm-0">Vaata pakkumisi →</button>
                 </div>
-                <div class="col-sm-4">
+
+                <div class="col-12 col-sm-4">
                     <img src="<?php echo $pilt; ?>" class="img-fluid" alt="Banner">
                 </div>
+
             </div>
         </div>
     </div>
 
     <?php
-    if (!empty($_GET['leht'])) {
+
+    if(!empty($_GET['leht'])) {
         $leht = htmlspecialchars($_GET['leht']);
         $lubatud = array('tooted', 'kontakt', 'admin');
         $kontroll = in_array($leht, $lubatud);
-        if ($kontroll == true) {
+        if($kontroll == true) {
             include($leht . '.php');
         } else {
             echo '<h1 class="text-center mt-4">Lehte ei eksisteeri!</h1>';
         }
+
     } else {
         ?>
-
-
         <div class="container">
+
             <div class="row text-center mt-5 mb-5">
                 <h2>Parimad pakkumised</h2>
             </div>
+
             <div class="row">
 
-
                 <?php
-                if (($csv = fopen("tooted.csv", "r")) !== FALSE) {
+                if(($csv = fopen("tooted.csv", "r")) !== FALSE) {
                     fgetcsv($csv);
-                    while ($andmed = fgetcsv($csv)) {
+                    while($andmed = fgetcsv($csv)) {
                         echo "
                         <div class='col-md-4 mb-4'>
                             <div class='card'>
@@ -110,10 +114,9 @@
                     fclose($csv);
                 }
                 ?>
+
             </div>
         </div>
-
-
         <?php
     }
     ?>
