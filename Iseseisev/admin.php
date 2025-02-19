@@ -38,7 +38,7 @@
         </form>
 
 
-        <h2>Praegused tooted</h2>
+        
 
         <div class="row">
 
@@ -91,7 +91,7 @@
                     echo "<div class='alert alert-danger'>Pildi üleslaadimine ebaõnnestus.</div>";
                 }
             }
-
+            echo '<h2>Praegused tooted</h2>';
             $tooted = andmed();
             foreach($tooted as $kustuta => $toode) {
                 echo "
@@ -106,7 +106,7 @@
                     </div>
                 </div>";
             }
-            
+
             ?>
         </div>
     </div>
