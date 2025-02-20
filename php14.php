@@ -1,72 +1,62 @@
-<!doctype html>
-<html lang="et">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>PHP Harjutused</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    </head>
-<body>
-    <div class="container">
-        <h1>Harjutus 14</h1>
+<?php
+$kataloog = 'php14_pildid'; // Directory containing images
+$pildid = []; // Array to store image file names
 
-        <form method="post" action="">
-            <select name="pildid"> 
-        <option value="">Vali pilt</option>
-        <?php 
-            $kataloog = 'php14_pildid';
-            $asukoht=opendir($kataloog);
-            while($rida = readdir($asukoht)){
-                if($rida!='.' && $rida!='..'){
-                    echo "<option value='$rida'>$rida</option>\n";
-                }
-            }
-        ?>
-    </select>
-    <input type="submit" value="Vaata">
-    </form>
-    <?php
-    if(!empty($_POST['pildid'])){
-        $pilt = $_POST['pildid'];
-        $pildi_aadress = 'php14_pildid/'.$pilt;
-        $pildi_andmed = getimagesize($pildi_aadress);
-        
-        $laius = $pildi_andmed[0];
-        $korgus = $pildi_andmed[1];
-        $formaat = $pildi_andmed[2];
-        $max_laius = 120;
-        $max_korgus = 90;
-        
-        //suhtearvu leidmine
-        if($laius <= $max_korgus && $korgus<=$max_korgus){
-            $ratio = 1;	
-        } elseif($laius>$korgus){
-            $ratio = $max_laius/$laius;	
-        } else {
-            $ratio = $max_korgus/$korgus;	
+// Open the directory and read files
+if (is_dir($kataloog)) {
+    $asukoht = opendir($kataloog);
+    while ($rida = readdir($asukoht)) {
+        if ($rida != '.' && $rida != '..') {
+            $pildid[] = $rida; // Add valid files to the $pildid array
         }
-        
-        //uute mõõtmete leidmine
-        $pisi_laius = round($laius*$ratio);
-        $pisi_korgus = round($korgus*$ratio);
-        
-        echo '<h3>Originaal pildi andmed</h3>';
-        echo "Laius: $laius<br>";
-        echo "Kõrgus: $korgus<br>";
-        echo "Formaat: $formaat<br>";
-        
-        echo '<h3>Uue pildi andmed</h3>';
-        echo "Arvutamse suhe: $ratio <br>";
-        echo "Laius: $pisi_laius<br>";
-        echo "Kõrgus: $pisi_korgus<br>";
-        echo "<img width='$pisi_laius' src='$pildi_aadress'><br>";
     }
-    ?>
+    closedir($asukoht); // Close the directory
+} else {
+    die("Directory '$kataloog' does not exist!");
+}
+
+$veergudeArv = 16; // Number of columns
+$suvalinePilt = $pildid[array_rand($pildid)]; // Random main image
+
+// Check if the form is submitted
+if (!empty($_POST)) {
+    // Randomly select $veergudeArv images from the $pildid array
+    $randomPildid = array_rand(array_flip($pildid), $veergudeArv);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suvaline Pilt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+    <h2 class="text-center">Suvaline pilt</h2>
+    <div class="text-center">
+        <img src="<?= "$kataloog/$suvalinePilt" ?>" class="img-fluid" alt="Suvaline Pilt" style="max-width: 500px; max-height: 400px;">
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <h3 class="mt-4">Pisipildid</h3>
+    <form method="post">
+        <button type="submit" class="btn btn-primary">Lisa juhuslikud pildid</button>
+    </form>
+
+    <div class="row flex-row mt-3">
+        <?php
+        if (!empty($_POST) && isset($randomPildid)) {
+            foreach ($randomPildid as $pilt) {
+                echo '
+                <div class="col-md text-center">
+                    <a href="' . "$kataloog/$pilt" . '" target="_blank">
+                        <img src="' . "$kataloog/$pilt" . '" class="img-thumbnail" style="max-width: 120px; max-height: 90px;">
+                    </a>
+                </div>';
+            }
+        }
+        ?>
+    </div>
 </body>
 </html>
-
-
-

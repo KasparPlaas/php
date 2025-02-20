@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .jumbo {
-            background-image: url(https://picsum.photos/1400/400);
+            background-image: url(https://picsum.photos/3400/600);
+            background-position: center;
             background-size: cover;
+            height: 600px;
         }
     </style>
 </head>
 <body>
-    <div class="jumbo">
-        <div class="container">
+<div class="jumbo">
+    <div class="container px-5">
 
             <nav class="navbar navbar-expand-lg text-secondary">
                 <div class="container-fluid">
@@ -73,7 +75,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <?php
 
     if(!empty($_GET['leht'])) {
@@ -88,35 +90,35 @@
 
     } else {
         ?>
-        <div class="container">
+<div class="container">
 
-            <div class="row text-center mt-5 mb-5">
-                <h2>Parimad pakkumised</h2>
-            </div>
+    <div class="row text-center mt-5 mb-5">
+        <h2>Parimad pakkumised</h2>
+    </div>
 
-            <div class="row">
+    <div class="row">
 
-                <?php
-                if(($csv = fopen("tooted.csv", "r")) !== FALSE) {
-                    fgetcsv($csv);
-                    while($andmed = fgetcsv($csv)) {
-                        echo "
-                        <div class='col-md-4 mb-4'>
-                            <div class='card'>
-                                <img src='{$andmed[0]}' class='card-img-top' alt='{$andmed[1]}'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>{$andmed[1]}</h5>
-                                    <p class='card-text'>{$andmed[2]}€</p>
-                                </div>
-                            </div>
-                        </div>";
-                    }
-                    fclose($csv);
-                }
-                ?>
+        <?php
+        if(($csv = fopen("tooted.csv", "r")) !== FALSE) {
+            fgetcsv($csv);
+            while($andmed = fgetcsv($csv)) {
+                echo "
+                <div class='col-md-4 mb-4'>
+                    <div class='card'>
+                        <img src='{$andmed[0]}' class='card-img-top' alt='{$andmed[1]}'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>{$andmed[1]}</h5>
+                            <p class='card-text'>{$andmed[2]}€</p>
+                        </div>
+                    </div>
+                </div>";
+            }
+            fclose($csv);
+        }
+        ?>
 
-            </div>
-        </div>
+    </div>
+</div>
         <?php
     }
     ?>

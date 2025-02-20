@@ -19,18 +19,24 @@
             <h2>Lisa uus toode</h2>
 
             <div class="mb-3">
-                <label class="form-label">Toote nimi:</label>
-                <input type="text" name="toote_nimi" class="form-control" required>
+                <label class="form-label">
+                    Toote nimi:
+                    <input type="text" name="toote_nimi" class="form-control" required>
+                </label>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Toote hind:</label>
-                <input type="number" name="toote_hind" class="form-control" required>
+                <label class="form-label">
+                    Toote hind:
+                    <input type="number" name="toote_hind" class="form-control" required>
+                </label>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Toote pilt (PNG):</label>
-                <input type="file" name="toote_pilt" class="form-control" accept=".png" required>
+                <label class="form-label">
+                    Toote pilt (PNG):
+                    <input type="file" name="toote_pilt" class="form-control" accept=".png" required>
+                </label>
             </div>
 
             <button type="submit" name="lisa" class="btn btn-primary">Lisa toode</button>
