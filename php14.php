@@ -1,23 +1,6 @@
-<?php
-$kataloog = 'php14_pildid';
-$pildid = []; 
-if (is_dir($kataloog)) {
-    $asukoht = opendir($kataloog);
-    while ($rida = readdir($asukoht)) {
-        if ($rida != '.' && $rida != '..') {
-            $pildid[] = $rida;
-        }
-    }
-    closedir($asukoht);
-}
+<!-- Suvaline pilt – koosta kood, mis valib kataloogist suvalise pildi
+Pisipildid veergudes – koosta kood, mis kuvab pisipildid näiteks kolmes veerus. Piltidele klikkides kuvatakse suurem pilt ning veergude arvu saan koodis kiiresti muuta. Pisipildid võid tekitada Photoshsopi abiga. -->
 
-$veergudeArv = 16;
-$suvalinePilt = $pildid[array_rand($pildid)]; 
-
-if (!empty($_POST)) {
-    $randomPildid = array_rand(array_flip($pildid), $veergudeArv);
-}
-?>
 
 <!DOCTYPE html>
 <html lang="et">
@@ -28,29 +11,6 @@ if (!empty($_POST)) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body class="container mt-4">
-    <h2 class="text-center">Suvaline pilt</h2>
-    <div class="text-center">
-        <img src="<?= "$kataloog/$suvalinePilt" ?>" class="img-fluid" alt="Suvaline Pilt" style="max-width: 500px; max-height: 400px;">
-    </div>
 
-    <h3 class="mt-4">Pisipildid</h3>
-    <form method="post">
-        <button type="submit" class="btn btn-primary">Lisa juhuslikud pildid</button>
-    </form>
-
-    <div class="row flex-row mt-3">
-        <?php
-        if (!empty($_POST) && isset($randomPildid)) {
-            foreach ($randomPildid as $pilt) {
-                echo '
-                <div class="col-md text-center">
-                    <a href="' . "$kataloog/$pilt" . '" target="_blank">
-                        <img src="' . "$kataloog/$pilt" . '" class="img-thumbnail" style="max-width: 120px; max-height: 90px;">
-                    </a>
-                </div>';
-            }
-        }
-        ?>
-    </div>
 </body>
 </html>
