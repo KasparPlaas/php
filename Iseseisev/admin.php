@@ -1,3 +1,11 @@
+<?php session_start();
+
+if(!isset($_SESSION['UserData']['Username'])){
+        header("location:login/login.php");
+        exit;
+}
+?>
+
 <!doctype html>
 <html lang="et">
 <head>
@@ -11,7 +19,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Admin leht</h1>
-            <a href="index.php" class="btn btn-secondary">Tagasi</a>
+            <a href="login/logout.php" class="btn btn-secondary">Logi välja</a>
         </div>
 
         <form method="POST" enctype="multipart/form-data" class="mb-5">
@@ -42,9 +50,6 @@
             <button type="submit" name="lisa" class="btn btn-primary">Lisa toode</button>
     
         </form>
-
-
-        
 
         <div class="row">
 

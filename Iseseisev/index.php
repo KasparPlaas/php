@@ -8,16 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .jumbo {
-            background-image: url(https://picsum.photos/3400/600);
-            background-position: center;
+            background-image: url(https://picsum.photos/1400/400);
             background-size: cover;
-            height: 600px;
         }
     </style>
 </head>
 <body>
-<div class="jumbo">
-    <div class="container px-5">
+    <div class="jumbo">
+        <div class="container">
 
             <nav class="navbar navbar-expand-lg text-secondary">
                 <div class="container-fluid">
@@ -27,7 +25,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
+                    
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -60,65 +58,62 @@
             $tekst = $tekstid[array_rand($tekstid)];
             ?>
 
-            <div class="row justify-content-center align-items-center text-center text-sm-start mt-5 mb-5 me-5 ms-5">
-
-                <div class="col-12 col-sm-8">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-sm-8">
                     <h2><?php echo $tekst; ?></h2>
                     <p>Kasuta ilma taustata pilti. Ja kindlasti võta kasutusele BS5!</p>
-                    <button class="btn btn-warning mb-3 mb-sm-0">Vaata pakkumisi →</button>
+                    <button class="btn btn-warning">Vaata pakkumisi →</button>
                 </div>
-
-                <div class="col-12 col-sm-4">
+                <div class="col-sm-4">
                     <img src="<?php echo $pilt; ?>" class="img-fluid" alt="Banner">
                 </div>
-
             </div>
         </div>
     </div>
-</div>
-    <?php
 
-    if(!empty($_GET['leht'])) {
+    <?php
+    if (!empty($_GET['leht'])) {
         $leht = htmlspecialchars($_GET['leht']);
         $lubatud = array('tooted', 'kontakt', 'admin');
         $kontroll = in_array($leht, $lubatud);
-        if($kontroll == true) {
+        if ($kontroll == true) {
             include($leht . '.php');
         } else {
             echo '<h1 class="text-center mt-4">Lehte ei eksisteeri!</h1>';
         }
-
     } else {
         ?>
-<div class="container">
 
-    <div class="row text-center mt-5 mb-5">
-        <h2>Parimad pakkumised</h2>
-    </div>
 
-    <div class="row">
+        <div class="container">
+            <div class="row text-center mt-5 mb-5">
+                <h2>Parimad pakkumised</h2>
+            </div>
+            <div class="row">
 
-        <?php
-        if(($csv = fopen("tooted.csv", "r")) !== FALSE) {
-            fgetcsv($csv);
-            while($andmed = fgetcsv($csv)) {
-                echo "
-                <div class='col-md-4 mb-4'>
-                    <div class='card'>
-                        <img src='{$andmed[0]}' class='card-img-top' alt='{$andmed[1]}'>
-                        <div class='card-body'>
-                            <h5 class='card-title'>{$andmed[1]}</h5>
-                            <p class='card-text'>{$andmed[2]}€</p>
-                        </div>
-                    </div>
-                </div>";
-            }
-            fclose($csv);
-        }
-        ?>
 
-    </div>
-</div>
+                <?php
+                if ($csv = fopen("tooted.csv", "r")) {
+                    fgetcsv($csv);
+                    while ($andmed = fgetcsv($csv)) {
+                        echo "
+                        <div class='col-md-4 mb-4'>
+                            <div class='card'>
+                                <img src='{$andmed[0]}' class='card-img-top' alt='{$andmed[1]}'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>{$andmed[1]}</h5>
+                                    <p class='card-text'>{$andmed[2]}€</p>
+                                </div>
+                            </div>
+                        </div>";
+                    }
+                    fclose($csv);
+                }
+                ?>
+            </div>
+        </div>
+
+
         <?php
     }
     ?>

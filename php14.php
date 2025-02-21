@@ -1,26 +1,20 @@
 <?php
-$kataloog = 'php14_pildid'; // Directory containing images
-$pildid = []; // Array to store image file names
-
-// Open the directory and read files
+$kataloog = 'php14_pildid';
+$pildid = []; 
 if (is_dir($kataloog)) {
     $asukoht = opendir($kataloog);
     while ($rida = readdir($asukoht)) {
         if ($rida != '.' && $rida != '..') {
-            $pildid[] = $rida; // Add valid files to the $pildid array
+            $pildid[] = $rida;
         }
     }
-    closedir($asukoht); // Close the directory
-} else {
-    die("Directory '$kataloog' does not exist!");
+    closedir($asukoht);
 }
 
-$veergudeArv = 16; // Number of columns
-$suvalinePilt = $pildid[array_rand($pildid)]; // Random main image
+$veergudeArv = 16;
+$suvalinePilt = $pildid[array_rand($pildid)]; 
 
-// Check if the form is submitted
 if (!empty($_POST)) {
-    // Randomly select $veergudeArv images from the $pildid array
     $randomPildid = array_rand(array_flip($pildid), $veergudeArv);
 }
 ?>
