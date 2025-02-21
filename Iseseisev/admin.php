@@ -103,7 +103,9 @@ if(!isset($_SESSION['UserData']['Username'])){
                 }
             }
             echo '<h2>Praegused tooted</h2>';
+
             $tooted = andmed();
+            
             foreach($tooted as $kustuta => $toode) {
                 echo "
                 <div class='col-md-4 mb-4'>
